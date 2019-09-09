@@ -13,8 +13,6 @@ counter_click = Counter()
 def index(request):
     # Реализуйте логику подсчета количества переходов с лендига по GET параметру from-landing
 
-    links = ['original', 'test']
-
     link_arg = request.GET.get('from-landing')
     if link_arg == 'original':
         counter_click['original'] += 1
@@ -29,8 +27,6 @@ def landing(request):
     # в зависимости от GET параметра ab-test-arg
     # который может принимать значения original и test
     # Так же реализуйте логику подсчета количества показов
-
-    landings = ['original', 'test']
 
     landing_arg = request.GET.get('ab-test-arg')
     if landing_arg == 'original':
@@ -48,16 +44,16 @@ def stats(request):
     # Для вывода результат передайте в следующем формате:
 
     if counter_show['test'] == 0:
-        test_landing_conversion = 0
+        test_landing_conversion = 'показов пока не было!'
     else:
-        test_landing_conversion = counter_click['test']/counter_show['test']
+        test_landing_conversion = round((counter_click['test']/counter_show['test']), 2)
 
     if counter_show['original'] == 0:
-        original_landing_conversion = 0
+        original_landing_conversion = 'показов пока не было!'
     else:
-        original_landing_conversion = counter_click['original']/counter_show['original']
+        original_landing_conversion = round((counter_click['original']/counter_show['original']), 2)
 
     return render_to_response('stats.html', context={
-        'test_conversion': round(test_landing_conversion, 1),
-        'original_conversion': round(original_landing_conversion, 1),
+        'test_conversion': test_landing_conversion,
+        'original_conversion': original_landing_conversion,
     })

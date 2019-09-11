@@ -30,7 +30,11 @@
               {% for row in rows %}
               <tr>
                 {% for item in row %}
-                  <td>{{ item }}</td>
+                  {% if item %}
+                    <td>{{ item }}</td>
+                  {% else %}
+                    <td>{{ '—' }}</td>
+                  {% endif %}  
                 {% endfor %}
               </tr>
               {% endfor %}

@@ -1,4 +1,5 @@
 <!DOCTYPE html>{% load static %}
+{% load color_filter %}
 <html>
   <head>
     <meta charset="UTF-8">
@@ -17,30 +18,35 @@
       <div class="row">
         <h1 class="col s12">Инфляция в России</h1>
         <div class="col s12 m8">
-
           <table class="table">
+
             <thead>
               <tr>
                 {% for heading in headings %}
-                  <th>{{ heading }}</th>
+                  {% if forloop.last %}
+                    <th style="background:gray">{{ heading }}</th>
+                  {% else %}
+                    <th>{{ heading }}</th>
+                  {% endif %}
                 {% endfor %}
               </tr>
             </thead>
+
             <tbody>
               {% for row in rows %}
-              <tr>
-                {% for item in row %}
-                  {% if item %}
-                    <td>{{ item }}</td>
-                  {% else %}
-                    <td>{{ '—' }}</td>
-                  {% endif %}  
-                {% endfor %}
-              </tr>
+                <tr>
+                  {% for item in row %}
+                    {% if forloop.last %}
+                      <td style="background:gray">{{ item|default:'—' }}</td>
+                    {% else %}
+                      <td style="background:{{item|color_filter}}">{{ item|default:'—' }}</td>
+                    {% endif %}
+                  {% endfor %}
+                </tr>
               {% endfor %}
             </tbody>
-          </table>
 
+          </table>
         </div>
       </div>
     {% endblock %}

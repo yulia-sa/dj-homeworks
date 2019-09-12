@@ -85,8 +85,8 @@ def format_selftext(text, words_count):
     if len(words) <= words_count * 2:
         return text
 
-    text_beginning = ' '.join(words[0:5])
-    text_end = ' '.join(words[-5:])
+    text_beginning = ' '.join(words[0:words_count])
+    text_end = ' '.join(words[-words_count:])
 
     result = text_beginning + ' ... ' + text_end
 

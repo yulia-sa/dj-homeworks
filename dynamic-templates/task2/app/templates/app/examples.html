@@ -5,5 +5,7 @@
 {% block name %}Каталог компьютеров Apple{% endblock %}
 
 {% block content %}
-  {% include 'app/includes/inc__computers.html' %}
+  {% for item in items %}
+      {% include 'app/includes/inc__computer.html' %}
+  {% endfor %}
 {% endblock %}

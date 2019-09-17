@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load existence_filter %}
 
 {% block title %}Каталог{% endblock %}
 {% block content %}
@@ -7,5 +8,180 @@
         <div class="header">
             <h1>Сравнение телефонов</h1>
         </div>
+
+        <div class="col s12 m8">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>{{ fields.0 }}</td>
+                  {% for phone in phones %}
+                    <th>{{ phone.name }}</th>
+                  {% endfor %}
+              </tr>         
+              <tr>
+                <td>{{ fields.1 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.price }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.2 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.operating_system }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.3 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.operating_memory_capacity }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.4 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.storage_capacity }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.5 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.chip }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.6 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.screen_size }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.7 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.screen_resolution }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.8 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.main_сamera }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>   
+                <td>{{ fields.9 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.flash|existence_filter }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.10 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.autofocus|existence_filter }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.11 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.front_camera }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.12 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.sim_cards_quantity }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.13 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.sim_card_type }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>   
+                <td>{{ fields.14 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.mp3_player|existence_filter }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.15 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.fm_radio|existence_filter }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.16 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.usb|existence_filter }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>   
+                <td>{{ fields.17 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.water_dust_resistance|existence_filter }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.18 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.wireless_charging|existence_filter }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.19 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.weight }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>{{ fields.20 }}</td>
+                  {% for phone in phones %}
+                    <td>{{ phone.country }}</td>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td>Дополнительно</td>
+                    <td>
+                      {% for feature in motorola_features %}
+                        {{ feature.feature }}
+                        <br>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {% for feature in apple_features %}
+                        {{ feature.feature }}
+                        <br>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {% for feature in ginzzu_features %}
+                        {{ feature.feature}}
+                        <br>
+                      {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+
     </div>
 {% endblock %}

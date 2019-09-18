@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bool_filter %}
 
 {% block title %}Телефон{% endblock %}
 {% block content %}
@@ -8,7 +9,17 @@
             <h1>Телефон</h1>
         </div>
         <div class="content">
-
+            <div class="col-12 phone">
+                {% if phone %}
+                    <h2>{{ phone.name }}</h2>
+                    <p class="price">Стоимость: {{ phone.price }}р.</p>
+                    <p class="release_date">Дата выпуска: {{ phone.release_date }}</p>
+                    <p class="lte_exists">Наличие LTE: {{ phone.lte_exists|bool_filter }}</p>
+                    <img src={{ phone.image }} alt={{ phone.name }}>
+                {% else %}
+                    <h2>Не найден</h2>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

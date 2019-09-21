@@ -22,5 +22,19 @@
                 {% endfor %}
             {% endif %}
         </div>
+        <div class="footer">
+            <ul class="list-inline">
+                {% if previous_pub_date %}
+                    <li class="list-inline-item">
+                        <a href='/books/{{ previous_pub_date|date:"c" }}'> < {{ previous_pub_date|date:"c" }}</a>
+                    </li>
+                {% endif %}
+                {% if next_pub_date %}
+                    <li class="list-inline-item">
+                        <a href='/books/{{ next_pub_date|date:"c" }}'>{{ next_pub_date|date:"c" }} > </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

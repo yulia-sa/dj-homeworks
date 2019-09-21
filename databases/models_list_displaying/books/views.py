@@ -22,16 +22,32 @@ def date_books_view(request, year, month, day):
 
     try:
         date = datetime(year=year, month=month, day=day).date()
+
     except (ValueError, TypeError):
-        date = ''
+        context = {
+            'books': ''
+        }
+
+        return render(request, template, context)
 
     books = Book.objects.filter(pub_date=date)
+ 
+    try:
+        previous_pub_dates_dict = Book.objects.values('pub_date').order_by('pub_date').filter(pub_date__lt=date)
+        previous_pub_date = previous_pub_dates_dict.reverse()[0]['pub_date']
+    except IndexError:
+        previous_pub_date = ''
 
-    print(books)
-    
+    try:
+        next_pub_dates_dict = Book.objects.values('pub_date').order_by('pub_date').filter(pub_date__gt=date)
+        next_pub_date = next_pub_dates_dict[0]['pub_date']
+    except IndexError:
+        next_pub_date = ''
 
     context = {
-        'books': books
+        'books': books,
+        'previous_pub_date': previous_pub_date,
+        'next_pub_date': next_pub_date
     }
 
     return render(request, template, context)

@@ -16,6 +16,8 @@
         {% for scope in article.scopes.all %}
           <span class="badge {% if scope.is_main %}badge-primary{% else %}badge-secondary{% endif %}">{{ scope.topic }}</span>
         {% endfor %}
+        <p>{{ article.genre }}</p>
+        <p>{{ article.author }}</p>
       </div>
     </div>
   </div>

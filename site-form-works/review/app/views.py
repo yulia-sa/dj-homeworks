@@ -5,6 +5,9 @@ from .models import Product, Review
 from .forms import ReviewForm
 
 
+reviewed_products = []
+
+
 def product_list_view(request):
     template = 'app/product_list.html'
     products = Product.objects.all()
@@ -19,15 +22,26 @@ def product_list_view(request):
 def product_view(request, pk):
     template = 'app/product_detail.html'
     product = get_object_or_404(Product, id=pk)
+    reviews = Review.objects.filter(product=product).order_by('-id')
 
-    form = ReviewForm
+    request.session['reviewed_products'] = reviewed_products
+
+    if request.method == 'GET':
+        form = ReviewForm
+
     if request.method == 'POST':
-        # логика для добавления отзыва
-        pass
+        form = ReviewForm(request.POST)
+        review_text = ReviewForm(request.POST)['text'].value()
+        Review.objects.create(text=review_text, product=product)
+        request.session['reviewed_products'].append(product.id)
 
     context = {
         'form': form,
-        'product': product
+        'product': product,
+        'reviews': reviews
     }
+
+    if product.id in request.session['reviewed_products']:
+        context['is_review_exist'] = True
 
     return render(request, template, context)

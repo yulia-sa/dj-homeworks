@@ -5,9 +5,6 @@ from .models import Product, Review
 from .forms import ReviewForm
 
 
-reviewed_products = []
-
-
 def product_list_view(request):
     template = 'app/product_list.html'
     products = Product.objects.all()
@@ -24,7 +21,8 @@ def product_view(request, pk):
     product = get_object_or_404(Product, id=pk)
     reviews = Review.objects.filter(product=product).order_by('-id')
 
-    request.session['reviewed_products'] = reviewed_products
+    if 'reviewed_products' not in request.session.keys():
+        request.session['reviewed_products'] = []
 
     if request.method == 'GET':
         form = ReviewForm
@@ -34,6 +32,7 @@ def product_view(request, pk):
         review_text = ReviewForm(request.POST)['text'].value()
         Review.objects.create(text=review_text, product=product)
         request.session['reviewed_products'].append(product.id)
+        request.session.modified = True
 
     context = {
         'form': form,

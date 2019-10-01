@@ -16,11 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
-import views
+from articles.views import show_articles, show_article, subscribe
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('articles/', views.show_articles),
-    url(r'^articles/(?P<id>[0-9]+)/', views.show_article),
-]
+    path('', show_articles),
+    path('subscription/', subscribe, name='subscription'),
+    path('articles/', show_articles),
+    url(r'^articles/(?P<id>[0-9]+)/', show_article, name='show_article'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

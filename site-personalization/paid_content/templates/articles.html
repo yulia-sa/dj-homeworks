@@ -9,9 +9,26 @@
             <h1>Список статей</h1>
         </div>
         <div class="articles">
-            <h3>Статья 1</h3>
-            <h3>Статья 2</h3>
-            <h3>Статья 3</h3>
+            {% for article in articles %}
+                {% if not article.is_paid %}
+                    <h3>
+                        <a href="{% url 'show_article' article.id %}">
+                            {{ article.title }}
+                        </a>
+                    </h3>
+                {% else %}
+                    {% if is_subscribed %}
+                        <h3>
+                            <a href="{% url 'show_article' article.id %}">
+                                {{ article.title }}
+                            </a>
+                        </h3>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="subscription">
+            <a href="{% url 'subscription' %}">Подписка</a>
         </div>
     </div>
 {% endblock %}

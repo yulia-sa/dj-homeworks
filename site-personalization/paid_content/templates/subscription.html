@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Подписка{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h3 class="subscription">
+        {% if is_subscribed %}
+            Вы подписаны <br />
+            <a href="{% url 'subscription' %}?action=unsubscribe">
+                Отписаться
+            </a> 
+        {% else %}
+            Вы не подписаны <br />
+            <a href="{% url 'subscription' %}?action=subscribe">
+                Подписаться
+            </a>
+        {% endif %}
+        </h3>
+        <p><a href="/">К списку статей</a></p>
+    </div>
+{% endblock %}

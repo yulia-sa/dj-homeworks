@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Profile(models.Model):
-    name = models.CharField('Имя', max_length=100)
+    name = models.CharField('Имя', max_length=200)
     is_subscribed = models.BooleanField(default=False, verbose_name='Есть подписка?')
 
     class Meta:
